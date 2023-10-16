@@ -38,7 +38,7 @@ async function get_hero() {
 
 
 
-        document.getElementById('keyLine').innerHTML = res.data.keyLine;
+        document.getElementById('keyLine').innerHTML = res.data.key_line;
         document.getElementById('short_title').innerHTML = res.data.short_title;
         document.getElementById('title').innerHTML = res.data.title;
         document.getElementById('profileImg').src = res.data.img

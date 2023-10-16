@@ -6,6 +6,7 @@
                     <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">About Me</span></h2>
                     <p id="about_title" class="lead fw-light mb-4"></p>
                     <p id="about_detail" class="text-muted"></p>
+
                     <div class="d-flex justify-content-center fs-2 gap-4">
                         <a id="social_twitter" target="_blank" class="text-gradient" href=""><i
                                 class="bi bi-twitter"></i></a>
@@ -29,7 +30,8 @@ async function get_about() {
         const result = await axios.get(URL);
 
 
-
+        document.getElementById('about_title').innerText  = result.data['title'];
+        document.getElementById('about_detail').innerText  = result.data['details'];
     } catch (error) {
         alert(error)
     }

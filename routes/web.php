@@ -1,13 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\ContactController;
+
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\Backend\HomeController;
+
+use App\Http\Controllers\Backend\BackendHero;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Middleware\TokenVarificationMiddleware;
 use App\Http\Controllers\Backend\dashboardController;
+use App\Http\Controllers\Backend\HomeController as BackendHomeController;
+
+
+// use App\Http\Controllers\Backend\CustomerController as BackendCustomerController;
 
 // Page Routes
 Route::get('/', [HomeController::class, 'page']);
@@ -49,22 +56,34 @@ Route::controller(UserController::class)->group(function () {
 });
 
 
-
-
+// group middleware
 Route::group(['middleware' => [TokenVarificationMiddleware::class]], function () {
 
 // Dashboard Controller
-Route::controller(dashboardController::class)->group(function () {
-    Route::get('/dashboard', 'dashboardPage')->name('dashboard');
-    Route::get('/profile', 'profilePage')->name('profile');
-});
-
+    Route::controller(dashboardController::class)->group(function () {
+        Route::get('/dashboard', 'dashboardPage')->name('dashboard');
+        Route::get('/profile', 'profilePage')->name('profile');
+    });
 
 
 // dashboard home
-Route::controller(HomeController::class)->group(function () {
+    Route::controller(BackendHero::class)->group(function () {
+        // ------ hero
+        Route::get('/hero', 'heroPage')->name('hero.page');
+        Route::get('/hero-data', 'herodata')->name('herodata');
+        Route::post('/update-hero', 'updateHero')->name('updateHero');
+
+        // -------about
+        Route::get('/about', 'aboutPage')->name('about.page');
+        Route::get('/about-data', 'aboutData');
+        Route::post('/update-about', 'updateAbout');
+
+        // -------social
+        Route::get('/social', 'socialPage')->name('social.page');
+        Route::get('/social-data', 'socialData');
+        Route::post('/update-social', 'updateSocial');
+
+
+    });
 
 });
-
-});
-// ====================== backaend end ========================

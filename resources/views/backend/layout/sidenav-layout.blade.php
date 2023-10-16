@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -19,6 +19,7 @@
     <script src="{{asset('backend/assets/js/bootstrap.bundle.js')}}"></script>
     <script src="{{asset('backend/assets/js/axios.min.js')}}"></script>
     <script src="{{asset('backend/assets/js/config.js')}}"></script>
+
 </head>
 
 <body>
@@ -60,56 +61,46 @@
         </div>
     </nav>
 
-
     <div id="sideNavRef" class="side-nav-open">
-        <a href="" class="side-bar-item">
-            <i class="bi bi-graph-up"></i>
-            <span class="side-bar-item-caption text-lg">Dashboard</span>
-        </a>
-        <a href="" class="side-bar-item">
-            <i class="bi bi-people"></i>
-            <span class="side-bar-item-caption text-lg">Home</span>
-        </a>
+        <ul class="side-bar-menu">
+            <li class="side-bar-item">
+                <a href="{{route('dashboard')}}">
+                    <i class="fas fa-tachometer-alt"></i><span class="side-bar-item-caption text-lg">Dashboard</span>
+                </a>
+            </li>
+            <li class="side-bar-item has-submenu">
+                <a href="#">
+                    <i class="fas fa-home"></i><span class="side-bar-item-caption text-lg">Home</span>
+                </a>
+                <ul class="submenu">
+                    <li class="sub_menu_li"><a href="{{route('hero.page')}}"><i class="fas fa-angle-right"></i><span class="">Hero</span></a></li>
+                    <li class="sub_menu_li"><a href="{{route('about.page')}}"><i class="fas fa-angle-right"></i><span class="">About</span></a></li>
+                    <li class="sub_menu_li"><a href="#"><i class="fas fa-angle-right"></i><span class="">Social</span></a></li>
+                </ul>
+            </li>
 
-        <a href="" class="side-bar-item">
-            <i class="bi bi-list-nested"></i>
-            <span class="side-bar-item-caption text-lg">Category</span>
-        </a>
-
-
-        <a href="" class="side-bar-item">
-            <i class="bi bi-bag"></i>
-            <span class="side-bar-item-caption text-lg">Product</span>
-        </a>
-        <a href="" class="side-bar-item">
-            <i class="bi bi-currency-dollar"></i>
-            <span class="side-bar-item-caption text-lg">Create Sale</span>
-        </a>
-
-        <a href="" class="side-bar-item">
-            <i class="bi bi-receipt"></i>
-            <span class="side-bar-item-caption text-lg">Invoice</span>
-        </a>
-
-        <a href="" class="side-bar-item">
-            <i class="bi bi-file-earmark-bar-graph"></i>
-            <span class="side-bar-item-caption text-lg">Report</span>
-        </a>
-
-
-
-
+            {{-- resume --}}
+            <li class="side-bar-item has-submenu">
+                <a href="#">
+                    <i class="fas fa-home"></i><span class="side-bar-item-caption text-lg">Resume</span>
+                </a>
+                <ul class="submenu">
+                    <li class="sub_menu_li"><a href="#"><i class="fas fa-angle-right"></i><span class="">Experience</span></a></li>
+                    <li class="sub_menu_li"><a href="#"><i class="fas fa-angle-right"></i><span class="">Education</span></a></li>
+                    <li class="sub_menu_li"><a href="#"><i class="fas fa-angle-right"></i><span class="">Professional Skills</span></a></li>
+                    <li class="sub_menu_li"><a href="#"><i class="fas fa-angle-right"></i><span class="">Languages</span></a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
 
-
-    <div id="contentRef" class="content">
+    <div id="contentRef" class="content main_body">
         @yield('content')
     </div>
 
-    <script src="{{asset('backend/assets/js/bootstrap.bundle.js')}}"></script>
 
     <script>
-    function MenuBarClickHandler() {
+        function MenuBarClickHandler() {
         let sideNav = document.getElementById('sideNavRef');
         let content = document.getElementById('contentRef');
         if (sideNav.classList.contains("side-nav-open")) {
@@ -124,6 +115,17 @@
             content.classList.add("content");
         }
     }
+    // =====sidebar menu
+        const itemsWithSubmenu = document.querySelectorAll(".has-submenu");
+
+        itemsWithSubmenu.forEach((item) => {
+            item.addEventListener("click", () => {
+                const submenu = item.querySelector(".submenu");
+                submenu.classList.toggle("show");
+            });
+        });
+
+
     </script>
 
 </body>

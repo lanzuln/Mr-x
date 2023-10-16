@@ -50,6 +50,8 @@ html {
     transform: translateX(-50%);
 }
 
+
+
 @media (min-width: 576px) {
     .profile {
         height: 60vw;
@@ -166,3 +168,5 @@ html {
 @keyframes s2{
   100%{transform: rotate(.5turn)}
 }
+
+
