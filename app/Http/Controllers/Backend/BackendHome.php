@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\HeroProperty;
+use App\Models\Social;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-class BackendHero extends Controller {
+class BackendHome extends Controller {
+
     public function heroPage() {
         return view('backend.pages.home.hero');
     }
@@ -68,13 +70,13 @@ class BackendHero extends Controller {
         return view('backend.pages.home.about');
     }
     public function aboutData(Request $request) {
-        $aboutData = About::first();
+        return About::first();
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Request successful',
-            'data' => $aboutData,
-        ], 200);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Request successful',
+        //     'data' => $aboutData,
+        // ], 200);
     }
 
     public function updateAbout(Request $request) {
@@ -86,11 +88,11 @@ class BackendHero extends Controller {
 
 
      // ---------- social
-     public function aboutPage() {
-        return view('backend.pages.home.about');
+     public function socialPage() {
+        return view('backend.pages.home.social');
     }
-    public function aboutData(Request $request) {
-        $aboutData = About::first();
+    public function socialData(Request $request) {
+        $aboutData = Social::first();
 
         return response()->json([
             'status' => 'success',
@@ -99,10 +101,13 @@ class BackendHero extends Controller {
         ], 200);
     }
 
-    public function updateAbout(Request $request) {
-        return About::first()->update([
-            'title'=> $request->input('title'),
-            'details'=> $request->input('details'),
+    public function updateSocial(Request $request) {
+        return Social::first()->update([
+            'twitterLink'=> $request->input('twitterLink'),
+            'githubLink'=> $request->input('githubLink'),
+            'linkedinLink'=> $request->input('linkedinLink'),
         ]);
     }
+
+
 }

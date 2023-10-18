@@ -14,9 +14,10 @@
     <link href="{{asset('backend/assets/css/datatables.min.css')}}" rel="stylesheet" />
     <link href="{{asset('backend/assets/css/style.css')}}" rel="stylesheet" />
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="{{asset('backend/assets/js/datatables.min.js')}}"></script>
     <script src="{{asset('backend/assets/js/toastify-js.js')}}"></script>
-    <script src="{{asset('backend/assets/js/bootstrap.bundle.js')}}"></script>
+
     <script src="{{asset('backend/assets/js/axios.min.js')}}"></script>
     <script src="{{asset('backend/assets/js/config.js')}}"></script>
 
@@ -75,7 +76,7 @@
                 <ul class="submenu">
                     <li class="sub_menu_li"><a href="{{route('hero.page')}}"><i class="fas fa-angle-right"></i><span class="">Hero</span></a></li>
                     <li class="sub_menu_li"><a href="{{route('about.page')}}"><i class="fas fa-angle-right"></i><span class="">About</span></a></li>
-                    <li class="sub_menu_li"><a href="#"><i class="fas fa-angle-right"></i><span class="">Social</span></a></li>
+                    <li class="sub_menu_li"><a href="{{route('social.page')}}"><i class="fas fa-angle-right"></i><span class="">Social</span></a></li>
                 </ul>
             </li>
 
@@ -85,7 +86,7 @@
                     <i class="fas fa-home"></i><span class="side-bar-item-caption text-lg">Resume</span>
                 </a>
                 <ul class="submenu">
-                    <li class="sub_menu_li"><a href="#"><i class="fas fa-angle-right"></i><span class="">Experience</span></a></li>
+                    <li class="sub_menu_li"><a href="{{route('listExperiencePage')}}"><i class="fas fa-angle-right"></i><span class="">Experience</span></a></li>
                     <li class="sub_menu_li"><a href="#"><i class="fas fa-angle-right"></i><span class="">Education</span></a></li>
                     <li class="sub_menu_li"><a href="#"><i class="fas fa-angle-right"></i><span class="">Professional Skills</span></a></li>
                     <li class="sub_menu_li"><a href="#"><i class="fas fa-angle-right"></i><span class="">Languages</span></a></li>
@@ -98,7 +99,7 @@
         @yield('content')
     </div>
 
-
+    <script src="{{asset('backend/assets/js/bootstrap.bundle.js')}}"></script>
     <script>
         function MenuBarClickHandler() {
         let sideNav = document.getElementById('sideNavRef');

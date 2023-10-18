@@ -29,7 +29,6 @@ async function get_about() {
         let URL = "/aboutData";
         const result = await axios.get(URL);
 
-
         document.getElementById('about_title').innerText  = result.data['title'];
         document.getElementById('about_detail').innerText  = result.data['details'];
     } catch (error) {

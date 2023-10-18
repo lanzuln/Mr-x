@@ -4,15 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\ContactController;
-
 use App\Http\Controllers\ProjectController;
-
-use App\Http\Controllers\Backend\BackendHero;
+use App\Http\Controllers\Backend\BackendHome;
+use App\Http\Controllers\Backend\BackendResume;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Middleware\TokenVarificationMiddleware;
 use App\Http\Controllers\Backend\dashboardController;
-use App\Http\Controllers\Backend\HomeController as BackendHomeController;
-
 
 // use App\Http\Controllers\Backend\CustomerController as BackendCustomerController;
 
@@ -55,7 +52,6 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/logout', 'logout')->name('logout');
 });
 
-
 // group middleware
 Route::group(['middleware' => [TokenVarificationMiddleware::class]], function () {
 
@@ -65,9 +61,8 @@ Route::group(['middleware' => [TokenVarificationMiddleware::class]], function ()
         Route::get('/profile', 'profilePage')->name('profile');
     });
 
-
 // dashboard home
-    Route::controller(BackendHero::class)->group(function () {
+    Route::controller(BackendHome::class)->group(function () {
         // ------ hero
         Route::get('/hero', 'heroPage')->name('hero.page');
         Route::get('/hero-data', 'herodata')->name('herodata');
@@ -82,8 +77,19 @@ Route::group(['middleware' => [TokenVarificationMiddleware::class]], function ()
         Route::get('/social', 'socialPage')->name('social.page');
         Route::get('/social-data', 'socialData');
         Route::post('/update-social', 'updateSocial');
+    });
+
+    // resume
+    Route::controller(BackendResume::class)->group(function () {
+    // ------ Experience
+        Route::get('/list-experience', 'listExperiencePage')->name('listExperiencePage');
+        Route::get('/experience-data', 'ExperienceData');
+
+        Route::post('/create-experience', 'createExperience');
+
+
+
 
 
     });
-
 });

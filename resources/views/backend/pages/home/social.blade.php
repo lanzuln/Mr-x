@@ -7,7 +7,7 @@
             <div class="col-md-6">
                 <section>
                     <div class="section_header mb-4">
-                        <h4>Home About</h4>
+                        <h4>Home Social</h4>
                     </div>
                     <div class="card">
                         <form id="save-form">
@@ -15,12 +15,14 @@
                                 <div class="row">
                                     <div class="col-12 p-1">
 
-                                        <label class="form-label">Title</label>
-                                        <input type="text" class="form-control" id="title" value="">
+                                        <label class="form-label">Twitter Link</label>
+                                        <input type="text" class="form-control" id="twitterLink" value="">
 
-                                        <label class="form-label">Details</label>
-                                        <textarea class="form-control" name="" id="details" cols="30" rows="10"></textarea>
+                                        <label class="form-label">Github Link</label>
+                                        <input type="text" class="form-control" id="githubLink" value="">
 
+                                        <label class="form-label">Linkedin Link</label>
+                                        <input type="text" class="form-control" id="linkedinLink" value="">
 
                                         <button onclick="update()" id="update-btn"
                                             class="btn btn-sm btn-success mt-3">Update</button>
@@ -41,11 +43,12 @@
         async function FillAboutData() {
             try {
                 showLoader();
-                let res = await axios.get("/about-data");
+                let res = await axios.get("/social-data");
                 hideLoader();
 
-                document.getElementById('title').value = res.data['title'];
-                document.getElementById('details').value = res.data['details'];
+                document.getElementById('twitterLink').value = res.data['data']['twitterLink'];
+                document.getElementById('githubLink').value = res.data['data']['githubLink'];
+                document.getElementById('linkedinLink').value = res.data['data']['linkedinLink'];
 
             } catch (error) {
                 console.error('Error fetching hero data:', error);
@@ -53,19 +56,23 @@
         }
 
         async function update() {
-            let update_title = document.getElementById('title').value;
-            let update_details = document.getElementById('details').value;
+            let update_twitter = document.getElementById('twitterLink').value
+            let update_github = document.getElementById('githubLink').value
+            let update_linkedin = document.getElementById('linkedinLink').value
 
 
-            if (update_title.length === 0) {
+            if (update_twitter.length === 0) {
                 errorToast("Required !")
-            } else if (update_details.length === 0) {
+            } else if (update_github.length === 0) {
+                errorToast("Required !")
+            } else if (update_linkedin.length === 0) {
                 errorToast("Required !")
             } else {
                 showLoader();
-                let res = await axios.post("/update-about", {
-                    title: update_title,
-                    details: update_details
+                let res = await axios.post("/update-social", {
+                    twitterLink: update_twitter,
+                    githubLink: update_github,
+                    linkedinLink: update_linkedin
                 });
                 hideLoader();
 
