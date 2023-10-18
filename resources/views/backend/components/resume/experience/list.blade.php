@@ -66,8 +66,8 @@
                     <td style="white-space: normal !important;">${item['details']}</td>
                     <td>${item['designation']}</td>
                     <td>
-                        <button data-id="${item['id']}" class="btn edit btn-sm btn-outline-success">Edit</button>
-                        <button data-id="${item['id']}" class="btn delete btn-sm btn-outline-danger">Delete</button>
+                        <button data-sl="${item['id']}" class="edit  btn btn-sm btn-outline-success">Edit</button>
+                        <button data-id="${item['id']}" class="delete btn  btn-sm btn-outline-danger">Delete</button>
                     </td>
                 </tr>`;
             tableList.append(row);
@@ -75,9 +75,8 @@
 
 
         $('.edit').on('click', async function() {
-            let id = $(this).data('id');
-            let filePath = $(this).data('path');
-            await FillUpUpdateForm(id, filePath);
+            let id = $(this).data('sl');
+            await FillUpUpdateForm(id);
             $("#update-modal").modal('show');
         })
 
@@ -93,8 +92,12 @@
 
         })
 
+
         tableData.DataTable({
-            lengthMenu: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50],
+            lengthMenu: [ 10, 15, 20, 25, 30, 35, 40, 45, 50],
+            order: [
+                [0, 'ASC']
+            ],
             language: {
                 paginate: {
                     next: '&#8594;', // or '→'

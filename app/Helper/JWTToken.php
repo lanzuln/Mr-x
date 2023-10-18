@@ -16,6 +16,7 @@ class JWTToken
             'iss' => 'laravel_token',
             'iat' => time(),
             'exp' => time() + 24 * 60 * 60,
+
             'userEmail' => $userEmail,
             'user_id' => $user_id
         ];
