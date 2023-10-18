@@ -46,7 +46,20 @@ class BackendResume extends Controller {
 
         return response()->json([
         'status'=>'ok',
-        'message'=>'Request successfull'
+        'message'=>'সব ঠিক আছে'
+        ], 200);
+
+    }
+
+    public function deleteExperience(request $request){
+
+        $experience_id = $request->input('id');
+
+        Experience::where('id',$experience_id)->delete();
+
+        return response()->json([
+        'status'=>'ok',
+        'message'=>'ডিলেট হইছে'
         ], 200);
 
     }

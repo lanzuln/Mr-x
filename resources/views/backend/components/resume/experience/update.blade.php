@@ -86,7 +86,7 @@ async function Update() {
 
         if (res.data['status'] == 'ok') {
             document.getElementById("update-form").reset();
-            successToast("Request success !")
+            successToast(res.data.message)
             await getList();
         } else {
             errorToast("Request fail !")

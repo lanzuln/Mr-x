@@ -89,6 +89,7 @@ Route::group(['middleware' => [TokenVarificationMiddleware::class]], function ()
         Route::post("/customer-by-id",'experienceById');
 
         Route::post("/update-experience",'updateExperience');
+        Route::post("/delete-experience",'deleteExperience');
 
 
 

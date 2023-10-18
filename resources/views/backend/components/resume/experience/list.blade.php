@@ -82,12 +82,9 @@
 
         $('.delete').on('click', function() {
             let id = $(this).data('id');
-            let filePath = $(this).data('path');
 
 
             $("#deleteID").val(id);
-            $("#deleteFilePath").val(filePath);
-
             $("#delete-modal").modal('show');
 
         })
