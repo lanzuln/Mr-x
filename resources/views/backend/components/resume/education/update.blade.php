@@ -10,17 +10,17 @@
                         <div class="row">
                             <div class="col-12 p-1">
 
-                                <label class="form-label">Duration</label>
+                                <label class="form-label">duration</label>
                                 <input type="text" class="form-control" id="Update_duration">
 
-                                <label class="form-label">Title</label>
-                                <input type="text" class="form-control" id="Update_title">
+                                <label class="form-label">institutionName</label>
+                                <input type="text" class="form-control" id="Update_institutionName">
 
-                                <label class="form-label">Designation</label>
-                                <input type="text" class="form-control" id="Update_designation">
+                                <label class="form-label">field</label>
+                                <input type="text" class="form-control" id="Update_field">
 
-                                <label class="form-label">Details</label>
-                                <textarea class="form-control" name="" id="Update_details" cols="30" rows="10"></textarea>
+                                <label class="form-label">details</label>
+                                <textarea name="" class="form-control" id="Update_details" cols="30" rows="10"></textarea>
 
                                 <input type="text" class="d-none" id="updateByID">
 
@@ -42,15 +42,15 @@
 async function FillUpUpdateForm(id) {
     document.getElementById('updateByID').value = id;
     showLoader();
-    let res = await axios.post("/experience-by-id", {
+    let res = await axios.post("/education-by-id", {
         id: id
     })
     hideLoader();
 
 
     document.getElementById('Update_duration').value = res.data['duration'];
-    document.getElementById('Update_title').value = res.data['title'];
-    document.getElementById('Update_designation').value = res.data['designation'];
+    document.getElementById('Update_institutionName').value = res.data['institutionName'];
+    document.getElementById('Update_field').value = res.data['field'];
     document.getElementById('Update_details').value = res.data['details'];
 }
 
@@ -58,16 +58,16 @@ async function FillUpUpdateForm(id) {
 async function Update() {
 
     let Update_duration = document.getElementById('Update_duration').value;
-    let Update_title = document.getElementById('Update_title').value;
-    let Update_designation = document.getElementById('Update_designation').value;
+    let Update_institutionName = document.getElementById('Update_institutionName').value;
+    let Update_field = document.getElementById('Update_field').value;
     let Update_details = document.getElementById('Update_details').value;
     let updateByID = document.getElementById('updateByID').value;
 
     if (Update_duration.length === 0) {
         errorToast("duration Required !")
-    } else if (Update_title.length === 0) {
+    } else if (Update_institutionName.length === 0) {
         errorToast("title Required !")
-    } else if (Update_designation.length === 0) {
+    } else if (Update_field.length === 0) {
         errorToast("designation Required !")
     }else if (Update_details.length === 0) {
         errorToast("details Required !")
@@ -75,10 +75,10 @@ async function Update() {
 
         document.getElementById('update-modal-close').click();
         showLoader();
-        let res = await axios.post("/update-experience", {
+        let res = await axios.post("/update-education", {
             duration: Update_duration,
-            title: Update_title,
-            designation: Update_designation,
+            institutionName: Update_institutionName,
+            field: Update_field,
             details: Update_details,
             id: updateByID
         })

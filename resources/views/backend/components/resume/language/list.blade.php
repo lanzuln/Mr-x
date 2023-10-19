@@ -1,7 +1,6 @@
 <div class="container">
     <div class="row">
 
-        {{-- about --}}
         <div class="col-md-12">
             <section>
                 <div class="section_header mb-4">
@@ -10,7 +9,7 @@
                 <div class="card px-5 py-5">
                     <div class="row justify-content-between ">
                         <div class="align-items-center col">
-                            <h4>Experience List</h4>
+                            <h4>Skills List</h4>
                         </div>
                         <div class="align-items-center col">
                             <button data-bs-toggle="modal" data-bs-target="#create-modal"
@@ -21,11 +20,8 @@
                     <table class="table" id="tableData">
                         <thead>
                             <tr class="bg-light">
-                                <th>No</th>
-                                <th>Duration</th>
-                                <th>Title</th>
-                                <th>details</th>
-                                <th>Designation</th>
+                                <th style="width:20px">No</th>
+                                <th>Skill name</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -43,10 +39,11 @@
 <script>
     getList();
 
+
     async function getList() {
 
         showLoader();
-        let res = await axios.get("/experience-data");
+        let res = await axios.get("/language-data");
         hideLoader();
 
 
@@ -60,12 +57,9 @@
         res.data.forEach(function(item, index) {
             let row = `<tr>
                     <td>${index + 1}</td>
-                    <td>${item['duration']}</td>
-                    <td>${item['title']}</td>
-                    <td style="white-space: normal !important;">${item['details']}</td>
-                    <td>${item['designation']}</td>
+                    <td>${item['name']}</td>
                     <td>
-                        <button data-sl="${item['id']}" class="edit  btn btn-sm btn-outline-success">Edit</button>
+                        <button data-id="${item['id']}" class="edit  btn btn-sm btn-outline-success">Edit</button>
                         <button data-id="${item['id']}" class="delete btn  btn-sm btn-outline-danger">Delete</button>
                     </td>
                 </tr>`;
@@ -74,7 +68,7 @@
 
 
         $('.edit').on('click', async function() {
-            let id = $(this).data('sl');
+            let id = $(this).data('id');
             await FillUpUpdateForm(id);
             $("#update-modal").modal('show');
         })
@@ -104,6 +98,6 @@
     }
 
     $('#tableData').dataTable({
-        "autoWidth": false
+        "autoWidth": true
     });
 </script>

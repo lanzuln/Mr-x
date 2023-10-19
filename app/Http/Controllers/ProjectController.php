@@ -12,6 +12,6 @@ class ProjectController extends Controller
         return view('pages.projects',compact('seo'));
     }
     function projectsData(Request $request){
-        return DB::table('projects')->get();
+        return DB::table('projects')->latest()->get();
     }
 }

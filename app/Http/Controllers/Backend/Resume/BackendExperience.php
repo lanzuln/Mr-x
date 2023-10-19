@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Backend\Resume;
 
 use App\Models\Experience;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class BackendResume extends Controller {
+class BackendExperience extends Controller {
     public function listExperiencePage() {
         return view('backend.pages.resume.experience');
     }
 
-    public function ExperienceData() {
+    public function experienceData() {
         return  Experience::get();
     }
 
@@ -46,7 +46,7 @@ class BackendResume extends Controller {
 
         return response()->json([
         'status'=>'ok',
-        'message'=>'সব ঠিক আছে'
+        'message'=>'Update succesfull'
         ], 200);
 
     }
@@ -59,7 +59,7 @@ class BackendResume extends Controller {
 
         return response()->json([
         'status'=>'ok',
-        'message'=>'ডিলেট হইছে'
+        'message'=>'Delete succesfull'
         ], 200);
 
     }

@@ -27,7 +27,7 @@ async function itemDelete() {
     document.getElementById('delete-modal-close').click();
 
     showLoader();
-    let res = await axios.post("/delete-experience", {
+    let res = await axios.post("/delete-skill", {
         id: id
     })
     hideLoader();

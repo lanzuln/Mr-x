@@ -14,8 +14,7 @@ function successToast(msg) {
         text: msg,
         className: "mb-5",
         style: {
-
-            background: "linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12)",
+            backgroundImage: "linear-gradient(to right top, #42ac82, #49be77, #5fcf65, #80de49, #a8eb12)",
             borderRadius: "50px",
             padding:"15px 30px"
         }

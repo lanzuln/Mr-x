@@ -10,7 +10,7 @@
                 <div class="card px-5 py-5">
                     <div class="row justify-content-between ">
                         <div class="align-items-center col">
-                            <h4>Experience List</h4>
+                            <h4>Education List</h4>
                         </div>
                         <div class="align-items-center col">
                             <button data-bs-toggle="modal" data-bs-target="#create-modal"
@@ -21,11 +21,11 @@
                     <table class="table" id="tableData">
                         <thead>
                             <tr class="bg-light">
-                                <th>No</th>
-                                <th>Duration</th>
-                                <th>Title</th>
+                                <th style="width: 5%">No</th>
+                                <th>duration</th>
+                                <th>institutionName</th>
                                 <th>details</th>
-                                <th>Designation</th>
+                                <th>field</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -43,10 +43,11 @@
 <script>
     getList();
 
+
     async function getList() {
 
         showLoader();
-        let res = await axios.get("/experience-data");
+        let res = await axios.get("/education-data");
         hideLoader();
 
 
@@ -58,12 +59,13 @@
 
 
         res.data.forEach(function(item, index) {
+            let shortSentence = item['details'].split(' ').slice(0, 5).join(' ');
             let row = `<tr>
                     <td>${index + 1}</td>
                     <td>${item['duration']}</td>
-                    <td>${item['title']}</td>
-                    <td style="white-space: normal !important;">${item['details']}</td>
-                    <td>${item['designation']}</td>
+                    <td>${item['institutionName']}</td>
+                    <td style="white-space: normal !important;">${shortSentence}</td>
+                    <td>${item['field']}</td>
                     <td>
                         <button data-sl="${item['id']}" class="edit  btn btn-sm btn-outline-success">Edit</button>
                         <button data-id="${item['id']}" class="delete btn  btn-sm btn-outline-danger">Delete</button>
