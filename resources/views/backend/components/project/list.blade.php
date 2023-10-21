@@ -67,8 +67,8 @@
                     <td><img src="${item['previewLink']}" class="img-fluid"></td>
                     <td style="white-space: normal !important;">${truncatedDetails}</td>
                     <td>
-                        <button data-path="${item['thumbnailLink']}" data-id="${item['id']}" class="edit  btn btn-sm btn-outline-success">Edit</button>
-                        <button data-id="${item['id']}" class="delete btn  btn-sm btn-outline-danger">Delete</button>
+                        <button data-thumb="${item['thumbnailLink']}" data-prev="${item['previewLink']}" data-id="${item['id']}" class="edit  btn btn-sm btn-outline-success">Edit</button>
+                        <button data-thumb="${item['thumbnailLink']}" data-prev="${item['previewLink']}" data-id="${item['id']}" class="delete btn  btn-sm btn-outline-danger">Delete</button>
                     </td>
                 </tr>`;
             tableList.append(row);
@@ -77,17 +77,20 @@
 
         $('.edit').on('click', async function() {
             let id = $(this).data('id');
-            let thumbPath = $(this).data('path');
-
-            await FillUpUpdateForm(id, thumbPath);
+            let thumbPath = $(this).data('thumb');
+            let prevPath = $(this).data('prev');
+            await FillUpUpdateForm(id, thumbPath, prevPath);
             $("#update-modal").modal('show');
         })
 
         $('.delete').on('click', function() {
             let id = $(this).data('id');
-
+            let thumbPath = $(this).data('thumb');
+            let prevPath = $(this).data('prev');
 
             $("#deleteID").val(id);
+            $("#deleteThumbPath").val(thumbPath);
+            $("#deletePrevPath").val(prevPath);
             $("#delete-modal").modal('show');
 
         })

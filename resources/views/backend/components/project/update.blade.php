@@ -27,12 +27,12 @@
 
                                     <div class="col-sm-6">
                                         <br />
-                                        <img class="img-fluid" id="prevImg"
+                                        <img class="img-fluid" id="oldprevImg"
                                             src="">
                                         <br />
 
                                         <label class="form-label">Image</label>
-                                        <input oninput="prevImg.src=window.URL.createObjectURL(this.files[0])"
+                                        <input oninput="oldprevImg.src=window.URL.createObjectURL(this.files[0])"
                                             type="file" class="form-control" id="update_previewLink">
                                     </div>
                                 </div>
@@ -42,6 +42,7 @@
 
                                 <input type="text" name="" id="updateByID">
                                 <input type="text" class="" id="thumbPath">
+                                <input type="text" class="" id="prevPath">
 
                             </div>
                         </div>
@@ -58,12 +59,14 @@
 </div>
 
 <script>
-async function FillUpUpdateForm(id, thumbPath) {
+async function FillUpUpdateForm(id, thumbPath, prevPath) {
 
     document.getElementById('updateByID').value = id;
     document.getElementById('thumbPath').value = thumbPath;
+    document.getElementById('prevPath').value = prevPath;
 
     document.getElementById('oldThumbImg').src = thumbPath;
+    document.getElementById('oldprevImg').src = prevPath;
 
     showLoader();
 
@@ -75,47 +78,62 @@ async function FillUpUpdateForm(id, thumbPath) {
 }
 
 
-// async function Update() {
+async function Update() {
+    let update_title = document.getElementById('update_title').value;
+    let update_thumbnailLink = document.getElementById('update_thumbnailLink').files[0];
+    let update_previewLink = document.getElementById('update_previewLink').files[0];
+    let Update_details = document.getElementById('update_details').value;
+    let thumbPath = document.getElementById('thumbPath').value;
+    let prevPath = document.getElementById('prevPath').value;
+    let updateByID = document.getElementById('updateByID').value;
 
-//     let Update_duration = document.getElementById('Update_duration').value;
-//     let Update_institutionName = document.getElementById('Update_institutionName').value;
-//     let Update_field = document.getElementById('Update_field').value;
-//     let Update_details = document.getElementById('Update_details').value;
-//     let updateByID = document.getElementById('updateByID').value;
+    if (update_title.length === 0) {
+        errorToast("Title is required!");
+    } else if (!update_thumbnailLink) {
+        errorToast("Thumbnail is required!");
+    } else if (!update_previewLink) {
+        errorToast("Preview is required!");
+    } else if (thumbPath.length === 0) {
+        errorToast("Thumb path is required!");
+    } else if (prevPath.length === 0) {
+        errorToast("Prev path is required!");
+    } else if (Update_details.length === 0) {
+        errorToast("Details are required!");
+    } else {
+        document.getElementById('update-modal-close').click();
 
-//     if (Update_duration.length === 0) {
-//         errorToast("duration Required !")
-//     } else if (Update_institutionName.length === 0) {
-//         errorToast("title Required !")
-//     } else if (Update_field.length === 0) {
-//         errorToast("designation Required !")
-//     }else if (Update_details.length === 0) {
-//         errorToast("details Required !")
-//     } else {
+        let formData = new FormData();
+        formData.append('update_thumbnailLink', update_thumbnailLink);
+        formData.append('update_previewLink', update_previewLink);
+        formData.append('id', updateByID);
+        formData.append('title', update_title);
+        formData.append('details', Update_details);
+        formData.append('thumb_filePath', thumbPath);
+        formData.append('prev_filePath', prevPath);
 
-//         document.getElementById('update-modal-close').click();
-//         showLoader();
-//         let res = await axios.post("/update-education", {
-//             duration: Update_duration,
-//             institutionName: Update_institutionName,
-//             field: Update_field,
-//             details: Update_details,
-//             id: updateByID
-//         })
-//         hideLoader();
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        };
 
-//         if (res.data['status'] == 'ok') {
-//             document.getElementById("update-form").reset();
-//             successToast(res.data.message)
-//             await getList();
-//         } else {
-//             errorToast("Request fail !")
-//         }
+        showLoader();
+        try {
+            let res = await axios.post("/update-project", formData, config);
+            hideLoader();
 
-
-//     }
-
-
-
-// }
+            if (res.data === 1) {
+                document.getElementById("update-form").reset();
+                successToast(res.data.message);
+                await getList();
+            } else {
+                errorToast("Request failed!");
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            hideLoader();
+            errorToast("An error occurred. Please try again.");
+        }
+    }
+}
 </script>

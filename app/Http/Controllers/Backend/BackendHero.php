@@ -86,10 +86,10 @@ class BackendHero extends Controller {
 
 
      // ---------- social
-     public function aboutPage() {
+     public function socialPage() {
         return view('backend.pages.home.about');
     }
-    public function aboutData(Request $request) {
+    public function socialData(Request $request) {
         $aboutData = About::first();
 
         return response()->json([
@@ -99,7 +99,7 @@ class BackendHero extends Controller {
         ], 200);
     }
 
-    public function updateAbout(Request $request) {
+    public function updateSocial(Request $request) {
         return About::first()->update([
             'title'=> $request->input('title'),
             'details'=> $request->input('details'),

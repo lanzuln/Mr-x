@@ -130,10 +130,11 @@ Route::group(['middleware' => [TokenVarificationMiddleware::class]], function ()
         Route::get('/list-project', 'listProjectPage')->name('listProjectPage');
         Route::get('/project-data', 'projectData');
         Route::post('/create-project', 'createProject');
-
         Route::post("/project-by-id", 'ProjectById');
-        // Route::post("/update-experience", 'updateExperience');
-        // Route::post("/delete-experience", 'deleteExperience');
+
+        Route::post("/update-project", 'updateproject');
+
+        Route::post("/delete-project", 'deleteProject');
 
     });
 });

@@ -5,7 +5,9 @@
                 <h3 class=" mt-3 text-warning">Delete !</h3>
                 <p class="mb-3">Once delete, you can't get it back.</p>
 
-                <input class="d-none" id="deleteID" />
+                <input class="" id="deleteID" />
+                <input class="" id="deleteThumbPath" />
+                <input class="" id="deletePrevPath" />
             </div>
             <div class="modal-footer justify-content-end">
                 <div>
@@ -21,17 +23,22 @@
 </div>
 
 <script>
+
 async function itemDelete() {
     let id = document.getElementById('deleteID').value;
+    let deleteThumbPath = document.getElementById('deleteThumbPath').value;
+    let deletePrevPath = document.getElementById('deletePrevPath').value;
 
     document.getElementById('delete-modal-close').click();
 
     showLoader();
-    let res = await axios.post("/delete-experience", {
-        id: id
+    let res = await axios.post("/delete-project", {
+        id: id,
+        thumb_filePath: deleteThumbPath,
+        prev_filePath: deletePrevPath
     })
     hideLoader();
-    if (res.data['status'] == 'ok') {
+    if (res.data === 1) {
         successToast(res.data.message)
         $("#delete-modal").trigger("reset");
         await getList();
