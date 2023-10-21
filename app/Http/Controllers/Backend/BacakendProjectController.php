@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class BacakendProjectController extends Controller
-{
+class BacakendProjectController extends Controller {
     public function listProjectPage() {
         return view('backend.pages.project.project');
     }
@@ -30,17 +29,23 @@ class BacakendProjectController extends Controller
         $prev_file->move(public_path('/uploads/project'), $prev_fileName);
         $prev_filePath = "uploads/project/{$prev_fileName}";
 
-
-         Project::create([
-            'title'=>$request->input('title'),
-            'thumbnailLink'=>$thumb_filePath,
-            'previewLink'=>$prev_filePath,
-            'details'=>$request->input('details')
+        Project::create([
+            'title' => $request->input('title'),
+            'thumbnailLink' => $thumb_filePath,
+            'previewLink' => $prev_filePath,
+            'details' => $request->input('details'),
         ]);
         return response()->json([
-        'status'=>'ok',
-        'message'=>'Created successfully'
+            'status' => 'ok',
+            'message' => 'Created successfully',
         ], 200);
+    }
+
+    public function ProjectById(Request $request) {
+
+        $project_id = $request->input('id');
+        return Project::where('id', $project_id)->first();
+
     }
 
 }

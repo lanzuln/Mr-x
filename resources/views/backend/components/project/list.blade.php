@@ -67,7 +67,7 @@
                     <td><img src="${item['previewLink']}" class="img-fluid"></td>
                     <td style="white-space: normal !important;">${truncatedDetails}</td>
                     <td>
-                        <button data-sl="${item['id']}" class="edit  btn btn-sm btn-outline-success">Edit</button>
+                        <button data-path="${item['thumbnailLink']}" data-id="${item['id']}" class="edit  btn btn-sm btn-outline-success">Edit</button>
                         <button data-id="${item['id']}" class="delete btn  btn-sm btn-outline-danger">Delete</button>
                     </td>
                 </tr>`;
@@ -76,8 +76,10 @@
 
 
         $('.edit').on('click', async function() {
-            let id = $(this).data('sl');
-            await FillUpUpdateForm(id);
+            let id = $(this).data('id');
+            let thumbPath = $(this).data('path');
+
+            await FillUpUpdateForm(id, thumbPath);
             $("#update-modal").modal('show');
         })
 

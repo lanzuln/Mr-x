@@ -129,10 +129,9 @@ Route::group(['middleware' => [TokenVarificationMiddleware::class]], function ()
     Route::controller(BacakendProjectController::class)->group(function () {
         Route::get('/list-project', 'listProjectPage')->name('listProjectPage');
         Route::get('/project-data', 'projectData');
-
         Route::post('/create-project', 'createProject');
 
-        // Route::post("/experience-by-id", 'experienceById');
+        Route::post("/project-by-id", 'ProjectById');
         // Route::post("/update-experience", 'updateExperience');
         // Route::post("/delete-experience", 'deleteExperience');
 
